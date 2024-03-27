@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
-use Session;
-use App\Model\users;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -23,43 +21,40 @@ class AuthController extends Controller
 
     public function postregister(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             "name" => "required",
-            "email" => "rquired|email|unique:users",
+            "email" => "required|email|unique:users",
             "password" => "required|min:6",
         ]);
 
         $data = $request->all();
-        $createUser = this->create($data);
-        return redirect("login")->withSuccess("we are register successfully");
+        $this->create($data);
+        
+        return redirect("login")->withSuccess("User registered successfully");
     }
 
     public function create(array $data)
     {
-        return user::create([
+        return User::create([
             "name" => $data["name"],
             "email" => $data["email"],
-            "password" => $data["password"],
+            "password" => bcrypt($data["password"]), // Use bcrypt to hash the password
         ]);
     }
 
     public function postlogin(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
-            "email" => "rquired|email",
+            "email" => "required|email",
             "password" => "required",
         ]);
-        $checkLoginCradentials = $request->only("email", "password");
-        if (Auth::attempt($checkLoginCradentials)) {
-            return redirect("login")->withSuccess(
-                "we are register successfully"
-            );
+
+        $credentials = $request->only("email", "password");
+        
+        if (Auth::attempt($credentials)) {
+            return redirect("dashboard")->withSuccess("Login successful");
         }
 
-        return redirect("login")->withSuccess("we are register successfully");
+        return redirect("login")->withError("Invalid login credentials");
     }
 }

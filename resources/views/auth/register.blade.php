@@ -17,7 +17,7 @@
     <input type="text" class="form-control" placeholder="enter your name" name="name">
 </div>
 @if($errors->has('name'))
-<span class="text-danger">{{@errors->first('name')}}</span>
+<span class="text-danger">{{$errors->first('name')}}</span>
 @endif
 </div>
 
@@ -26,8 +26,8 @@
     <div class="col-md-3">
         <input type="text" class="form-control" placeholder="enter your email" name="email">
     </div>
-    @if($errors->has('name'))
-<span class="text-danger">{{@errors->first('name')}}</span>
+    @if($errors->has('email'))
+<span class="text-danger">{{$errors->first('email')}}</span>
 @endif
     </div>
 
@@ -36,6 +36,9 @@
         <div class="col-md-3">
             <input type="text" class="form-control" placeholder="enter your password" name="password"> 
         </div>
+        @if($errors->has('passowrd'))
+<span class="text-danger">{{$errors->first('password')}}</span>
+@endif
         </div>
 
         <div class="form-group row">
