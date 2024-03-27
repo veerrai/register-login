@@ -36,7 +36,7 @@
         <div class="col-md-3">
             <input type="text" class="form-control" placeholder="enter your password" name="password"> 
         </div>
-        @if($errors->has('passowrd'))
+        @if($errors->has('password'))
 <span class="text-danger">{{$errors->first('password')}}</span>
 @endif
         </div>

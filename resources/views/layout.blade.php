@@ -33,7 +33,7 @@
         <li><a href="{{url('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         
         @else
-        <li><a href="{{url('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="{{url('logout')}}"><span class="glyphicon glyphicon-log-out">Welcome, {{$user->name}}</span> Logout</a></li>
 
         @endguest
        

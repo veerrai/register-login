@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         $data = $request->all();
         $this->create($data);
-        
+
         return redirect("login")->withSuccess("User registered successfully");
     }
 
@@ -50,11 +50,29 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only("email", "password");
-        
+
         if (Auth::attempt($credentials)) {
-            return redirect("dashboard")->withSuccess("Login successful");
+            return redirect()->route('dashboard')->withSuccess("Login successful");
         }
 
-        return redirect("login")->withError("Invalid login credentials");
+        return redirect()->back()->withInput($request->only('email'))->withErrors([
+            'email' => 'Invalid login credentials',
+        ]);
+    }
+
+
+  public function logout()
+    {
+        Auth::logout(); // Logout the user
+        return redirect()->route('login'); // Redirect to login page
+    }
+
+    public function dashboard()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            return view('dashboard', compact('user'));
+        }
+        return redirect("login")->withError("please login to access dashboard page");
     }
 }
