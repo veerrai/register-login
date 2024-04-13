@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">{{$user->name}}</a>
+        <a class="navbar-brand" href="#"></a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
@@ -26,7 +26,7 @@
         <li><a href="{{url('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         
         @else
-        <li><a href="{{url('logout')}}"><span class="glyphicon glyphicon-log-out">Welcome, {{$user->name}}</span> Logout</a></li>
+        <li><a href="{{url('logout')}}"><span class="glyphicon glyphicon-log-out">Welcome, </span> Logout</a></li>
 
         @endguest
        

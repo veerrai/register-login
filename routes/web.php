@@ -20,7 +20,7 @@ use App\Http\Controllers\Auth\AuthController;
 //     return view('welcome');
 // });
 
-Route::get('/login',[AuthController::class, 'index'])->name('login');
+Route::get('/',[AuthController::class, 'index'])->name('login');
 Route::get('/register',[AuthController::class, 'register'])->name('register');
 Route::post('/postregister',[AuthController::class, 'postregister'])->name('register.post');
 Route::post('/postlogin',[AuthController::class, 'postlogin'])->name('login.post');
